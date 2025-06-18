@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,10 @@ namespace Shef_Kuhar_2.Forms
                 dataGridView1.Columns["Quantity"].HeaderText = "Кількість";
             if (dataGridView1.Columns["Unit"] != null)
                 dataGridView1.Columns["Unit"].HeaderText = "Одиниця виміру";
+            if (dataGridView1.Columns["Calories"] != null)
+                dataGridView1.Columns["Calories"].HeaderText = "Калорійність (ккал)";
+            if (dataGridView1.Columns["Price"] != null)
+                dataGridView1.Columns["Price"].HeaderText = "Ціна (грн)";
             if (dataGridView1.Columns["ExpiryDate"] != null)
                 dataGridView1.Columns["ExpiryDate"].HeaderText = "Термін придатності";
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
@@ -54,8 +59,9 @@ namespace Shef_Kuhar_2.Forms
         "банка",
         "пляшка"
             });
-
-            comboUnit.SelectedIndex = -1;
+            comboEditUnit.Items.Clear();
+            comboEditUnit.Items.AddRange(comboUnit.Items.Cast<object>().ToArray());
+            comboEditUnit.SelectedIndex = -1;
             comboSort.Items.AddRange(new string[]
 {
         "Назва: А → Я",
@@ -72,7 +78,13 @@ namespace Shef_Kuhar_2.Forms
             int quantity = (int)numericQuantity.Value;
             string unit = comboUnit.SelectedItem?.ToString();
             DateTime expiryDate = dateExpiry.Value;
+            decimal price = numericPrice.Value;
 
+            if (!float.TryParse(txtCalories.Text.Trim(), out float calories) || calories < 0)
+            {
+                MessageBox.Show("Введіть коректну калорійність продукту.");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Введіть назву продукту.");
@@ -85,13 +97,13 @@ namespace Shef_Kuhar_2.Forms
                 return;
             }
 
-            Product newProduct = new Product
-            {
-                Name = name,
-                Quantity = quantity.ToString(),
-                Unit = unit,
-                ExpiryDate = expiryDate
-            };
+            Product newProduct = new Product(
+                name,
+                quantity.ToString(),
+                unit,
+                expiryDate,
+                calories
+            );
 
             products.Add(newProduct);
             ProductService.SaveProducts(products);
@@ -102,6 +114,7 @@ namespace Shef_Kuhar_2.Forms
             numericQuantity.Value = 1;
             comboUnit.SelectedIndex = -1;
             dateExpiry.Value = DateTime.Today;
+            txtCalories.Clear();
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -123,7 +136,14 @@ namespace Shef_Kuhar_2.Forms
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.DataBoundItem is Product selected)
+            {
+                txtEditName.Text = selected.Name;
+                numericEditQuantity.Value = decimal.TryParse(selected.Quantity, out var quantity) ? quantity : numericEditQuantity.Minimum;
+                comboEditUnit.SelectedItem = selected.Unit;
+                dateEditExpiry.Value = selected.ExpiryDate;
+                numericEditPrice.Value = selected.Price;
+            }
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -157,6 +177,25 @@ namespace Shef_Kuhar_2.Forms
             }
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = products;
+        }
+
+        private void btnEditSave_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null) return;
+
+            var product = (Product)dataGridView1.CurrentRow.DataBoundItem;
+
+            product.Name = txtEditName.Text.Trim();
+            product.Quantity = numericEditQuantity.Value.ToString();
+            product.Unit = comboEditUnit.SelectedItem?.ToString() ?? "";
+            product.ExpiryDate = dateEditExpiry.Value;
+            product.Price = numericEditPrice.Value;
+            product.Calories = float.Parse(txtEditCalories.Text.Trim());
+
+            ProductService.SaveProducts(products);
+            ProductService.AddHistory($"Оновлено продукт: {product.Name}");
+
+            LoadProducts();
         }
     }
 }

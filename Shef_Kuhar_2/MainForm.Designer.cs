@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.btnOpenProductForm = new System.Windows.Forms.Button();
+            this.btnRecipe = new System.Windows.Forms.Button();
+            this.btnDailyMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOpenProductForm
@@ -41,12 +43,34 @@
             this.btnOpenProductForm.UseVisualStyleBackColor = true;
             this.btnOpenProductForm.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnRecipe
+            // 
+            this.btnRecipe.Location = new System.Drawing.Point(104, 123);
+            this.btnRecipe.Name = "btnRecipe";
+            this.btnRecipe.Size = new System.Drawing.Size(323, 42);
+            this.btnRecipe.TabIndex = 1;
+            this.btnRecipe.Text = "Список рецептів";
+            this.btnRecipe.UseVisualStyleBackColor = true;
+            this.btnRecipe.Click += new System.EventHandler(this.btnRecipe_Click);
+            // 
+            // btnDailyMenu
+            // 
+            this.btnDailyMenu.Location = new System.Drawing.Point(104, 183);
+            this.btnDailyMenu.Name = "btnDailyMenu";
+            this.btnDailyMenu.Size = new System.Drawing.Size(323, 43);
+            this.btnDailyMenu.TabIndex = 2;
+            this.btnDailyMenu.Text = "Меню";
+            this.btnDailyMenu.UseVisualStyleBackColor = true;
+            this.btnDailyMenu.Click += new System.EventHandler(this.btnDailyMenu_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(524, 364);
+            this.Controls.Add(this.btnDailyMenu);
+            this.Controls.Add(this.btnRecipe);
             this.Controls.Add(this.btnOpenProductForm);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -59,6 +83,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnOpenProductForm;
+        private System.Windows.Forms.Button btnRecipe;
+        private System.Windows.Forms.Button btnDailyMenu;
     }
 }
 

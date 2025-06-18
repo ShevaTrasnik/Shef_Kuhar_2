@@ -33,5 +33,9 @@ namespace ShefKuhar.Services
             if (!File.Exists(HistoryPath)) return new List<string>();
             return new List<string>(File.ReadAllLines(HistoryPath));
         }
+        public static List<Product> GetAllProducts()
+        {
+            return LoadProducts();
+        }
     }
 }

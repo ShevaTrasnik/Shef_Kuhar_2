@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace Shef_Kuhar_2
 {
+    
     public partial class MainForm: Form
     {
+
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +29,18 @@ namespace Shef_Kuhar_2
         {
             ProductForm productForm = new ProductForm();
             productForm.Show();
+        }
+
+        private void btnRecipe_Click(object sender, EventArgs e)
+        {
+            RecipeListForm recipeForm = new RecipeListForm();
+            recipeForm.Show();
+        }
+
+        private void btnDailyMenu_Click(object sender, EventArgs e)
+        {
+            var dailyMenuForm = new DailyMenuForm();
+            dailyMenuForm.ShowDialog();
         }
     }
 }

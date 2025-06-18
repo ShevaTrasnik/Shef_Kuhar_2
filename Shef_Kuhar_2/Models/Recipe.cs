@@ -1,12 +1,22 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ShefKuhar.Models
+namespace Shef_Kuhar_2.Models
 {
-    /// Представляє один рецепт.
-    public class Recipe
-    {
-        public string Name { get; set; }                  // Назва страви
-        public string Description { get; set; }           // Опис приготування
-        public List<Ingredient> Ingredients { get; set; } // Список інгредієнтів
+        public class Recipe
+        {
+            public string Name { get; set; }
+            public string Category { get; set; }
+            public double OutputGrams { get; set; }
+            public string Instructions { get; set; }
+            public List<RecipeIngredient> Ingredients { get; set; }
+            public override string ToString()
+            {
+                return Name;
+            }
     }
+
 }

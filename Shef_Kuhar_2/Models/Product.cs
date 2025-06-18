@@ -7,16 +7,18 @@ namespace Shef_Kuhar_2.Models
         public string Name { get; set; }
         public string Quantity { get; set; }
         public string Unit { get; set; }
+        public float Calories { get; set; }
+        public decimal Price { get; set; }
         public DateTime ExpiryDate { get; set; }
-        public Product() { }
 
-
-        public Product(string name, string quantity, string unit, DateTime expiryDate)
+        public Product(string name, string quantity, string unit, DateTime expiryDate, float calories)
         {
             Name = name;
             Quantity = quantity;
             Unit = unit;
             ExpiryDate = expiryDate;
+            Calories = calories;
         }
+
     }
 }
