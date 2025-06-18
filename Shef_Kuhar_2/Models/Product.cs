@@ -11,13 +11,14 @@ namespace Shef_Kuhar_2.Models
         public decimal Price { get; set; }
         public DateTime ExpiryDate { get; set; }
 
-        public Product(string name, string quantity, string unit, DateTime expiryDate, float calories)
+        public Product(string name, string quantity, string unit, DateTime expiryDate, float calories, decimal price)
         {
             Name = name;
             Quantity = quantity;
             Unit = unit;
             ExpiryDate = expiryDate;
             Calories = calories;
+            Price = price;
         }
 
     }

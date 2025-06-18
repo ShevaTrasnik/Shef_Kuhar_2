@@ -10,6 +10,7 @@ namespace Shef_Kuhar_2.Models
     {
         public Recipe Recipe { get; set; }
         public int Portions { get; set; }
+        public int Persons { get; set; }
         public MenuItemModel() { }
         public MenuItemModel(Recipe recipe, int portions)
         {

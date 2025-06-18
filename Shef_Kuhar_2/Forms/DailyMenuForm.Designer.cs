@@ -40,6 +40,8 @@
             this.textBoxTotalGrams = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
+            this.btnCheckStock = new System.Windows.Forms.Button();
+            this.btnSaveMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudPersons)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,7 +115,7 @@
             // 
             // btnSelectDishes
             // 
-            this.btnSelectDishes.Location = new System.Drawing.Point(186, 267);
+            this.btnSelectDishes.Location = new System.Drawing.Point(194, 267);
             this.btnSelectDishes.Name = "btnSelectDishes";
             this.btnSelectDishes.Size = new System.Drawing.Size(129, 37);
             this.btnSelectDishes.TabIndex = 6;
@@ -123,7 +125,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(355, 374);
+            this.btnClose.Location = new System.Drawing.Point(372, 374);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(133, 51);
             this.btnClose.TabIndex = 7;
@@ -169,12 +171,34 @@
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
+            // btnCheckStock
+            // 
+            this.btnCheckStock.Location = new System.Drawing.Point(19, 374);
+            this.btnCheckStock.Name = "btnCheckStock";
+            this.btnCheckStock.Size = new System.Drawing.Size(125, 51);
+            this.btnCheckStock.TabIndex = 12;
+            this.btnCheckStock.Text = "Перевірити запаси";
+            this.btnCheckStock.UseVisualStyleBackColor = true;
+            this.btnCheckStock.Click += new System.EventHandler(this.btnCheckStock_Click);
+            // 
+            // btnSaveMenu
+            // 
+            this.btnSaveMenu.Location = new System.Drawing.Point(416, 297);
+            this.btnSaveMenu.Name = "btnSaveMenu";
+            this.btnSaveMenu.Size = new System.Drawing.Size(89, 23);
+            this.btnSaveMenu.TabIndex = 13;
+            this.btnSaveMenu.Text = "Зберегти";
+            this.btnSaveMenu.UseVisualStyleBackColor = true;
+            this.btnSaveMenu.Click += new System.EventHandler(this.btnSaveMenu_Click);
+            // 
             // DailyMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(517, 437);
+            this.Controls.Add(this.btnSaveMenu);
+            this.Controls.Add(this.btnCheckStock);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxTotalGrams);
@@ -213,5 +237,7 @@
         private System.Windows.Forms.TextBox textBoxTotalGrams;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnCheckStock;
+        private System.Windows.Forms.Button btnSaveMenu;
     }
 }

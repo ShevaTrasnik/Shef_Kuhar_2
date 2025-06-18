@@ -58,15 +58,17 @@
             this.numericPrice = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.numericEditPrice = new System.Windows.Forms.NumericUpDown();
-            this.txtCalories = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtEditCalories = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.numCal = new System.Windows.Forms.NumericUpDown();
+            this.numEditCal = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericEditQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericEditPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numEditCal)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -375,13 +377,6 @@
             this.numericEditPrice.Size = new System.Drawing.Size(120, 20);
             this.numericEditPrice.TabIndex = 29;
             // 
-            // txtCalories
-            // 
-            this.txtCalories.Location = new System.Drawing.Point(781, 244);
-            this.txtCalories.Name = "txtCalories";
-            this.txtCalories.Size = new System.Drawing.Size(173, 20);
-            this.txtCalories.TabIndex = 30;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -390,13 +385,6 @@
             this.label12.Size = new System.Drawing.Size(138, 13);
             this.label12.TabIndex = 31;
             this.label12.Text = "Калорійність (ккал)/ 100 г";
-            // 
-            // txtEditCalories
-            // 
-            this.txtEditCalories.Location = new System.Drawing.Point(154, 443);
-            this.txtEditCalories.Name = "txtEditCalories";
-            this.txtEditCalories.Size = new System.Drawing.Size(146, 20);
-            this.txtEditCalories.TabIndex = 32;
             // 
             // label13
             // 
@@ -407,16 +395,36 @@
             this.label13.TabIndex = 33;
             this.label13.Text = "Калорійність (ккал)/ 100 г";
             // 
+            // numCal
+            // 
+            this.numCal.Location = new System.Drawing.Point(782, 244);
+            this.numCal.Name = "numCal";
+            this.numCal.Size = new System.Drawing.Size(120, 20);
+            this.numCal.TabIndex = 34;
+            // 
+            // numEditCal
+            // 
+            this.numEditCal.DecimalPlaces = 2;
+            this.numEditCal.Location = new System.Drawing.Point(157, 443);
+            this.numEditCal.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numEditCal.Name = "numEditCal";
+            this.numEditCal.Size = new System.Drawing.Size(120, 20);
+            this.numEditCal.TabIndex = 35;
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(966, 529);
+            this.Controls.Add(this.numEditCal);
+            this.Controls.Add(this.numCal);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.txtEditCalories);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.txtCalories);
             this.Controls.Add(this.numericEditPrice);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.numericPrice);
@@ -458,6 +466,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericEditQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericEditPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numEditCal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,9 +505,9 @@
         private System.Windows.Forms.NumericUpDown numericPrice;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown numericEditPrice;
-        private System.Windows.Forms.TextBox txtCalories;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtEditCalories;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown numCal;
+        private System.Windows.Forms.NumericUpDown numEditCal;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Shef_Kuhar_2.Models;
 using Shef_Kuhar_2.Services;
+using ShefKuhar.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,7 @@ namespace Shef_Kuhar_2.Forms
 
             DailyMenuService.SaveMenu(menu);
         }
+
         private void LoadDailyMenu()
         {
             var loadedMenu = DailyMenuService.LoadMenu(dateTimePicker1.Value);
@@ -45,6 +47,8 @@ namespace Shef_Kuhar_2.Forms
                 nudPersons.Value = loadedMenu.Persons;
                 foreach (var item in selectedItems)
                 {
+                    if (item.Persons == 0)
+                        item.Persons = loadedMenu.Persons;
                     listViewSelectedRecipes.Items.Add(new ListViewItem(new[]
                     {
                 item.Recipe.Name,
@@ -101,7 +105,13 @@ namespace Shef_Kuhar_2.Forms
                 var selected = form.SelectedRecipe;
                 if (selected != null)
                 {
-                    selectedItems.Add(new MenuItemModel(selected, (int)nudPersons.Value));
+                    var portions = (int)nudPersons.Value;
+
+                    selectedItems.Add(new MenuItemModel
+                    {
+                        Recipe = selected,
+                        Persons = portions
+                    });
                     SaveDailyMenu();
                     listViewSelectedRecipes.Items.Add(new ListViewItem(new[]
                     {
@@ -176,6 +186,28 @@ namespace Shef_Kuhar_2.Forms
         {
             LoadDailyMenu();
             UpdateTotalOutputGrams();
+        }
+
+        private void btnCheckStock_Click(object sender, EventArgs e)
+        {
+            var products = ProductService.LoadProducts();
+            var invoice = DailyMenuService.GenerateInvoice(selectedItems, products);
+
+            var form = new InvoiceForm(invoice, products);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ProductService.SaveProducts(products);
+            }
+        }
+
+        private void btnSaveMenu_Click(object sender, EventArgs e)
+        {
+            foreach (var item in selectedItems)
+            {
+                item.Persons = (int)nudPersons.Value;
+            }
+            SaveDailyMenu();
+            MessageBox.Show("Меню збережено успішно!", "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

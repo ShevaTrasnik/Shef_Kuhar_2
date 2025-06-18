@@ -73,6 +73,12 @@
     <Compile Include="Forms\ImportMenuForm.Designer.cs">
       <DependentUpon>ImportMenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InvoiceForm.Designer.cs">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RecipeListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DailyMenuModel.cs" />
+    <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\MenuItemModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Recipe.cs" />
@@ -127,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImportMenuForm.resx">
       <DependentUpon>ImportMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InvoiceForm.resx">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>

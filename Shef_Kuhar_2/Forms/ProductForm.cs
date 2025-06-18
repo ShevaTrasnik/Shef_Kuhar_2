@@ -44,31 +44,40 @@ namespace Shef_Kuhar_2.Forms
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
+        private void ClearEditFields()
+        {
+            txtEditName.Text = "";
+            numericEditQuantity.Value = 1;
+            comboEditUnit.SelectedIndex = -1;
+            dateEditExpiry.Value = DateTime.Today;
+            numEditCal.Value = 0;
+            numericEditPrice.Value = 0;
+        }
         private void ProductForm_Load(object sender, EventArgs e)
         {
             LoadProducts();
             comboUnit.Items.Clear();
             comboUnit.Items.AddRange(new string[]
             {
-        "шт",
-        "кг",
-        "г",
-        "л",
-        "мл",
-        "упак.",
-        "банка",
-        "пляшка"
+                "шт",
+                "кг",
+                "г",
+                "л",
+                "мл",
+                "упак.",
+                "банка",
+                "пляшка"
             });
             comboEditUnit.Items.Clear();
             comboEditUnit.Items.AddRange(comboUnit.Items.Cast<object>().ToArray());
             comboEditUnit.SelectedIndex = -1;
             comboSort.Items.AddRange(new string[]
-{
-        "Назва: А → Я",
-        "Назва: Я → А",
-        "Термін придатності: спочатку найстаріші",
-        "Термін придатності: спочатку найновіші"
-        });
+            {
+                "Назва: А → Я",
+                "Назва: Я → А",
+                "Термін придатності: спочатку найстаріші",
+                "Термін придатності: спочатку найновіші"
+            });
             comboSort.SelectedIndex = 0;
         }
 
@@ -79,12 +88,8 @@ namespace Shef_Kuhar_2.Forms
             string unit = comboUnit.SelectedItem?.ToString();
             DateTime expiryDate = dateExpiry.Value;
             decimal price = numericPrice.Value;
+            float calories = (float)numCal.Value;
 
-            if (!float.TryParse(txtCalories.Text.Trim(), out float calories) || calories < 0)
-            {
-                MessageBox.Show("Введіть коректну калорійність продукту.");
-                return;
-            }
             if (string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Введіть назву продукту.");
@@ -102,7 +107,8 @@ namespace Shef_Kuhar_2.Forms
                 quantity.ToString(),
                 unit,
                 expiryDate,
-                calories
+                calories,
+                price
             );
 
             products.Add(newProduct);
@@ -114,8 +120,10 @@ namespace Shef_Kuhar_2.Forms
             numericQuantity.Value = 1;
             comboUnit.SelectedIndex = -1;
             dateExpiry.Value = DateTime.Today;
-            txtCalories.Clear();
+            numCal.Value = 0;
+            numericPrice.Value = 0;
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null)
@@ -129,11 +137,13 @@ namespace Shef_Kuhar_2.Forms
             ProductService.SaveProducts(products);
             ProductService.AddHistory($"Видалено продукт: {product.Name}");
             LoadProducts();
-        }  
+        }
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadProducts();
         }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.DataBoundItem is Product selected)
@@ -143,8 +153,10 @@ namespace Shef_Kuhar_2.Forms
                 comboEditUnit.SelectedItem = selected.Unit;
                 dateEditExpiry.Value = selected.ExpiryDate;
                 numericEditPrice.Value = selected.Price;
+                numEditCal.Value = (decimal)selected.Calories;
             }
         }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -181,7 +193,35 @@ namespace Shef_Kuhar_2.Forms
 
         private void btnEditSave_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow == null) return;
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Оберіть продукт для редагування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        
+            if (string.IsNullOrWhiteSpace(txtEditName.Text))
+            {
+                MessageBox.Show("Введіть назву продукту.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (comboEditUnit.SelectedIndex == -1)
+            {
+                MessageBox.Show("Оберіть одиницю виміру.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (numEditCal.Value <= 0)
+            {
+                MessageBox.Show("Введіть калорійність більше нуля.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (numericEditPrice.Value <= 0)
+            {
+                MessageBox.Show("Введіть ціну більше нуля.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             var product = (Product)dataGridView1.CurrentRow.DataBoundItem;
 
@@ -190,12 +230,14 @@ namespace Shef_Kuhar_2.Forms
             product.Unit = comboEditUnit.SelectedItem?.ToString() ?? "";
             product.ExpiryDate = dateEditExpiry.Value;
             product.Price = numericEditPrice.Value;
-            product.Calories = float.Parse(txtEditCalories.Text.Trim());
+            product.Calories = (float)numEditCal.Value;
 
             ProductService.SaveProducts(products);
             ProductService.AddHistory($"Оновлено продукт: {product.Name}");
 
             LoadProducts();
+            ClearEditFields();
+            dataGridView1.ClearSelection();
         }
     }
 }
