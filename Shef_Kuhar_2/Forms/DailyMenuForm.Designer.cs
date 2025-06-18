@@ -28,23 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.nudPersons = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.Дата = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nudPersons = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.listViewSelectedRecipes = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSelectDishes = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.btnRemoveDish = new System.Windows.Forms.Button();
+            this.textBoxTotalGrams = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnImport = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPersons)).BeginInit();
             this.SuspendLayout();
             // 
-            // nudPersons
+            // dateTimePicker1
             // 
-            this.nudPersons.Location = new System.Drawing.Point(13, 32);
-            this.nudPersons.Name = "nudPersons";
-            this.nudPersons.Size = new System.Drawing.Size(200, 20);
-            this.nudPersons.TabIndex = 0;
+            this.dateTimePicker1.Location = new System.Drawing.Point(13, 32);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 0;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // Дата
             // 
@@ -55,23 +60,23 @@
             this.Дата.TabIndex = 1;
             this.Дата.Text = "Дата";
             // 
-            // numericUpDown1
+            // nudPersons
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(302, 32);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.nudPersons.Location = new System.Drawing.Point(302, 32);
+            this.nudPersons.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.nudPersons.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(203, 20);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.nudPersons.Name = "nudPersons";
+            this.nudPersons.Size = new System.Drawing.Size(203, 20);
+            this.nudPersons.TabIndex = 2;
+            this.nudPersons.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -126,24 +131,69 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // btnRemoveDish
+            // 
+            this.btnRemoveDish.Location = new System.Drawing.Point(416, 267);
+            this.btnRemoveDish.Name = "btnRemoveDish";
+            this.btnRemoveDish.Size = new System.Drawing.Size(89, 23);
+            this.btnRemoveDish.TabIndex = 8;
+            this.btnRemoveDish.Text = "Видалити";
+            this.btnRemoveDish.UseVisualStyleBackColor = true;
+            this.btnRemoveDish.Click += new System.EventHandler(this.btnRemoveDish_Click);
+            // 
+            // textBoxTotalGrams
+            // 
+            this.textBoxTotalGrams.Location = new System.Drawing.Point(16, 308);
+            this.textBoxTotalGrams.Name = "textBoxTotalGrams";
+            this.textBoxTotalGrams.ReadOnly = true;
+            this.textBoxTotalGrams.Size = new System.Drawing.Size(145, 20);
+            this.textBoxTotalGrams.TabIndex = 9;
+            this.textBoxTotalGrams.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 290);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(139, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Загальна грамовка страв";
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(13, 59);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(195, 28);
+            this.btnImport.TabIndex = 11;
+            this.btnImport.Text = "Завантажити меню з дати";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // DailyMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(517, 437);
+            this.Controls.Add(this.btnImport);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxTotalGrams);
+            this.Controls.Add(this.btnRemoveDish);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSelectDishes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listViewSelectedRecipes);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.Дата);
             this.Controls.Add(this.nudPersons);
+            this.Controls.Add(this.Дата);
+            this.Controls.Add(this.dateTimePicker1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DailyMenuForm";
-            this.Text = "DailyMenuForm";
+            this.Text = "Меню на день";
             this.Load += new System.EventHandler(this.DailyMenuForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPersons)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,13 +201,17 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker nudPersons;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label Дата;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudPersons;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listViewSelectedRecipes;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSelectDishes;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnRemoveDish;
+        private System.Windows.Forms.TextBox textBoxTotalGrams;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnImport;
     }
 }

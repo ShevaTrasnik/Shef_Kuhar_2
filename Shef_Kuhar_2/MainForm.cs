@@ -39,6 +39,7 @@ namespace Shef_Kuhar_2
 
         private void btnDailyMenu_Click(object sender, EventArgs e)
         {
+            var recipes = RecipeService.LoadRecipes();
             var dailyMenuForm = new DailyMenuForm();
             dailyMenuForm.ShowDialog();
         }

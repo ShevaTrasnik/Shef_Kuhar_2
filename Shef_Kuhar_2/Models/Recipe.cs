@@ -15,7 +15,7 @@ namespace Shef_Kuhar_2.Models
             public List<RecipeIngredient> Ingredients { get; set; }
             public override string ToString()
             {
-                return Name;
+                return $"{Name} ({Category})";
             }
     }
 

@@ -67,6 +67,12 @@
     <Compile Include="Forms\DailyMenuForm.Designer.cs">
       <DependentUpon>DailyMenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ImportMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportMenuForm.Designer.cs">
+      <DependentUpon>ImportMenuForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RecipeListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,12 +103,14 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DailyMenuModel.cs" />
     <Compile Include="Models\MenuItemModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeIngredient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DailyMenuService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\ReciepService.cs" />
     <EmbeddedResource Include="Forms\AddIngredientDialog.resx">
@@ -116,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportMenuForm.resx">
+      <DependentUpon>ImportMenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>

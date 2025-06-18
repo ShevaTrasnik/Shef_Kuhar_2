@@ -447,8 +447,11 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAdd);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ProductForm";
-            this.Text = "Form1";
+            this.Text = "Склад продуктів";
             this.Load += new System.EventHandler(this.ProductForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).EndInit();

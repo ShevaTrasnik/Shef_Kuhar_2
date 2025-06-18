@@ -96,8 +96,11 @@
             this.Controls.Add(this.nudQuantity);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboProducts);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddIngredientDialog";
-            this.Text = "AddIngredientDialog";
+            this.Text = "Додати продукт";
             this.Load += new System.EventHandler(this.AddIngredientDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
             this.ResumeLayout(false);

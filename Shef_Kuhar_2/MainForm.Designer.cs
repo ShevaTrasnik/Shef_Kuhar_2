@@ -68,13 +68,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(524, 364);
+            this.ClientSize = new System.Drawing.Size(523, 311);
             this.Controls.Add(this.btnDailyMenu);
             this.Controls.Add(this.btnRecipe);
             this.Controls.Add(this.btnOpenProductForm);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form1";
+            this.Text = "Головна";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

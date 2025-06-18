@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shef_Kuhar_2.Models
 {
-    internal class MenuItemModel
+    public class MenuItemModel
     {
         public Recipe Recipe { get; set; }
         public int Portions { get; set; }

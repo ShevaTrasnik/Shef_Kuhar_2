@@ -188,6 +188,9 @@
             this.Controls.Add(this.cmbCategory);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddRecipeForm";
             this.Text = "Додати рецепт";
             this.Load += new System.EventHandler(this.AddRecipeForm_Load);

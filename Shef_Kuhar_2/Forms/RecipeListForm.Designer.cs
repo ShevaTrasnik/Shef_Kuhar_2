@@ -160,8 +160,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtInstructions);
             this.Controls.Add(this.btnAddRecipe);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RecipeListForm";
-            this.Text = "Form1";
+            this.Text = "Рецепти";
             this.Load += new System.EventHandler(this.RecipeListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).EndInit();
             this.ResumeLayout(false);

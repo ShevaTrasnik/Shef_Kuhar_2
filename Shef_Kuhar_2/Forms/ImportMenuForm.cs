@@ -1,4 +1,5 @@
 ﻿using Shef_Kuhar_2.Models;
+using Shef_Kuhar_2.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,37 +12,33 @@ using System.Windows.Forms;
 
 namespace Shef_Kuhar_2.Forms
 {
-    public partial class SelectRecipesForm : Form
+    public partial class ImportMenuForm : Form
     {
-        public Recipe SelectedRecipe { get; private set; }
-        private List<Recipe> allRecipes;
-        public SelectRecipesForm()
+        public List<MenuItemModel> ImportedItems { get; private set; } = new List<MenuItemModel>();
+        public ImportMenuForm()
         {
             InitializeComponent();
         }
-        public SelectRecipesForm(List<Recipe> recipes)
-        {
-            InitializeComponent();
-            allRecipes = recipes;
-            comboBoxRecipes.DataSource = allRecipes;
-            comboBoxRecipes.DisplayMember = "Name"; 
-        }
-        private void SelectRecipesForm_Load(object sender, EventArgs e)
+
+        private void ImportMenuForm_Load(object sender, EventArgs e)
         {
 
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (comboBoxRecipes.SelectedItem is Recipe selected)
+            var selectedDate = dateTimePicker1.Value.Date;
+
+            var menu = DailyMenuService.LoadMenu(selectedDate);
+            if (menu != null && menu.Items.Count > 0)
             {
-                SelectedRecipe = selected;
+                ImportedItems = menu.Items;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Оберіть рецепт зі списку.");
+                MessageBox.Show("На цю дату меню не знайдено.", "Увага", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
