@@ -59,7 +59,7 @@ namespace Shef_Kuhar_2.Forms
                     if (double.TryParse(product.Quantity, out double available))
                     {
                         double neededInStockUnit = UnitConverter.ConvertToSameUnit(item.Unit, item.NeededAmount, product.Unit);
-                        double newQty = available - item.NeededAmount;
+                        double newQty = available - neededInStockUnit;
                         product.Quantity = Math.Max(0, newQty).ToString("0.##");
                     }
                 }

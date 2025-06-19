@@ -36,6 +36,7 @@ namespace Shef_Kuhar_2.Forms
             txtInstructions.Text = recipeToEdit.Instructions;
 
             Ingredients = new List<RecipeIngredient>(recipeToEdit.Ingredients);
+
             dgvIngredients.Rows.Clear();
 
             foreach (var ingredient in Ingredients)
@@ -107,18 +108,49 @@ namespace Shef_Kuhar_2.Forms
                 MessageBox.Show("Оберіть категорію рецепта.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (Ingredients.Count == 0)
+
+            if (dgvIngredients.Rows.Count == 0 || dgvIngredients.Rows.Cast<DataGridViewRow>().All(r => r.IsNewRow))
             {
                 MessageBox.Show("Додайте хоча б один інгредієнт до рецепта.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            var updatedIngredients = new List<RecipeIngredient>();
+
+            foreach (DataGridViewRow row in dgvIngredients.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                string productName = row.Cells[0].Value?.ToString();
+                string quantityStr = row.Cells[1].Value?.ToString();
+
+                if (string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(quantityStr))
+                    continue;
+
+                if (!double.TryParse(quantityStr, out double quantity))
+                    continue;
+
+                updatedIngredients.Add(new RecipeIngredient
+                {
+                    ProductName = productName,
+                    Quantity = quantity,
+                    Unit = "г"
+                });
+            }
+
+            if (updatedIngredients.Count == 0)
+            {
+                MessageBox.Show("Немає коректних інгредієнтів у таблиці.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (isEditMode && editingRecipe != null)
             {
                 editingRecipe.Name = txtName.Text.Trim();
                 editingRecipe.Category = cmbCategory.SelectedItem.ToString();
                 editingRecipe.OutputGrams = (double)nudOutputGrams.Value;
                 editingRecipe.Instructions = txtInstructions.Text.Trim();
-                editingRecipe.Ingredients = new List<RecipeIngredient>(Ingredients);
+                editingRecipe.Ingredients = updatedIngredients;
             }
             else
             {
@@ -128,13 +160,15 @@ namespace Shef_Kuhar_2.Forms
                     Category = cmbCategory.SelectedItem.ToString(),
                     OutputGrams = (double)nudOutputGrams.Value,
                     Instructions = txtInstructions.Text.Trim(),
-                    Ingredients = new List<RecipeIngredient>(Ingredients)
+                    Ingredients = updatedIngredients
                 };
             }
+
             MessageBox.Show("Рецепт успішно збережено!", "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
 
         private void InitializeDgvIngredients()
         {
@@ -158,6 +192,18 @@ namespace Shef_Kuhar_2.Forms
                 DataPropertyName = "Calories",
                 Width = 100
             });
+        }
+        private void btnRemoveIngredien_Click(object sender, EventArgs e)
+        {
+            if (dgvIngredients.SelectedRows.Count > 0)
+            {
+                int index = dgvIngredients.SelectedRows[0].Index;
+                dgvIngredients.Rows.RemoveAt(index);
+            }
+            else
+            {
+                MessageBox.Show("Виберіть інгредієнт для видалення.", "Увага", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
         private void dgvIngredients_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

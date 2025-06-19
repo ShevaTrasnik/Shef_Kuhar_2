@@ -148,7 +148,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(176, 33);
             this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "Видалити вибраний продукт";
+            this.btnDelete.Text = "Видалити обраний продукт";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -255,11 +255,6 @@
             this.numericEditQuantity.Location = new System.Drawing.Point(180, 395);
             this.numericEditQuantity.Maximum = new decimal(new int[] {
             100000000,
-            0,
-            0,
-            0});
-            this.numericEditQuantity.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});

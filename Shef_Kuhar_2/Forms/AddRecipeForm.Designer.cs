@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnAddIngredient = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnRemoveIngredien = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudOutputGrams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIngredients)).BeginInit();
             this.SuspendLayout();
@@ -152,7 +153,7 @@
             // 
             // btnAddIngredient
             // 
-            this.btnAddIngredient.Location = new System.Drawing.Point(28, 476);
+            this.btnAddIngredient.Location = new System.Drawing.Point(335, 521);
             this.btnAddIngredient.Name = "btnAddIngredient";
             this.btnAddIngredient.Size = new System.Drawing.Size(153, 39);
             this.btnAddIngredient.TabIndex = 10;
@@ -170,12 +171,23 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnRemoveIngredien
+            // 
+            this.btnRemoveIngredien.Location = new System.Drawing.Point(28, 475);
+            this.btnRemoveIngredien.Name = "btnRemoveIngredien";
+            this.btnRemoveIngredien.Size = new System.Drawing.Size(153, 36);
+            this.btnRemoveIngredien.TabIndex = 12;
+            this.btnRemoveIngredien.Text = "Видалити";
+            this.btnRemoveIngredien.UseVisualStyleBackColor = true;
+            this.btnRemoveIngredien.Click += new System.EventHandler(this.btnRemoveIngredien_Click);
+            // 
             // AddRecipeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(500, 556);
+            this.ClientSize = new System.Drawing.Size(500, 582);
+            this.Controls.Add(this.btnRemoveIngredien);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAddIngredient);
             this.Controls.Add(this.label5);
@@ -215,5 +227,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnAddIngredient;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnRemoveIngredien;
     }
 }

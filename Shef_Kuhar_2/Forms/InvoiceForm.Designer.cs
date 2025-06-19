@@ -92,7 +92,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InvoiceForm";
-            this.Text = "InvoiceForm";
+            this.Text = "Накладна";
             this.Load += new System.EventHandler(this.InvoiceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvoice)).EndInit();
             this.ResumeLayout(false);
