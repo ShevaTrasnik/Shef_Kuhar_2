@@ -97,7 +97,7 @@ namespace Shef_Kuhar_2.Forms
                             dgvIngredients.Rows.Add(
                                 ingredient.ProductName,
                                 ingredient.Quantity,
-                                ingredient.GetCalories().ToString("0.##")
+                                ingredient.CaloriesPer100g.ToString("0.##")
                             );
                         }
                     }
@@ -135,18 +135,21 @@ namespace Shef_Kuhar_2.Forms
                 if (row.IsNewRow) continue;
                 string productName = row.Cells[0].Value?.ToString();
                 string quantityStr = row.Cells[1].Value?.ToString();
+                string caloriesStr = row.Cells[2].Value?.ToString();
 
                 if (string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(quantityStr))
                     continue;
 
                 if (!double.TryParse(quantityStr, out double quantity))
                     continue;
+                double.TryParse(caloriesStr, out double calories);
 
                 updatedIngredients.Add(new RecipeIngredient
                 {
                     ProductName = productName,
                     Quantity = quantity,
-                    Unit = "г"
+                    Unit = "г",
+                    CaloriesPer100g = calories
                 });
             }
 
