@@ -45,8 +45,6 @@ namespace Shef_Kuhar_2.Forms
                 dataGridViewInvoice.Columns["AvailableAmount"].HeaderText = "Є на складі";
             if (dataGridViewInvoice.Columns["Shortage"] != null)
                 dataGridViewInvoice.Columns["Shortage"].HeaderText = "Не вистачає";
-
-            dataGridViewInvoice.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnWriteOff_Click(object sender, EventArgs e)

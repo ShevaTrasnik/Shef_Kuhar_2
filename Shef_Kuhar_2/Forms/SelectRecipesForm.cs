@@ -17,7 +17,7 @@ namespace Shef_Kuhar_2.Forms
         private List<Recipe> allRecipes;
         public SelectRecipesForm()
         {
-            InitializeComponent();
+           
         }
         public SelectRecipesForm(List<Recipe> recipes)
         {

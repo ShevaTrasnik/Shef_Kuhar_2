@@ -80,8 +80,20 @@ namespace Shef_Kuhar_2.Forms
                     {
                         foreach (var ingredient in ingredientDialog.Ingredients)
                         {
-                            Ingredients.Add(ingredient);
+                            bool exists = dgvIngredients.Rows.Cast<DataGridViewRow>()
+                            .Any(row => !row.IsNewRow && row.Cells[0].Value?.ToString().Equals(ingredient.ProductName, StringComparison.OrdinalIgnoreCase) == true);
 
+                            if (exists)
+                            {
+                                MessageBox.Show($"Продукт \"{ingredient.ProductName}\" вже є у списку!", "Увага", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                continue;
+                            }
+                            if (ingredient.Quantity <= 0)
+                            {
+                                MessageBox.Show($"Кількість для продукту \"{ingredient.ProductName}\" не може бути 0!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                continue;
+                            }
+                            Ingredients.Add(ingredient);
                             dgvIngredients.Rows.Add(
                                 ingredient.ProductName,
                                 ingredient.Quantity,
@@ -91,11 +103,12 @@ namespace Shef_Kuhar_2.Forms
                     }
                     else
                     {
-                        MessageBox.Show("Ингредиенты не были добавлены.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Інгредієнти не були додані.", "Попередження", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
         }
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -120,7 +133,6 @@ namespace Shef_Kuhar_2.Forms
             foreach (DataGridViewRow row in dgvIngredients.Rows)
             {
                 if (row.IsNewRow) continue;
-
                 string productName = row.Cells[0].Value?.ToString();
                 string quantityStr = row.Cells[1].Value?.ToString();
 

@@ -37,12 +37,6 @@ namespace Shef_Kuhar_2.Forms
                 dataGridView1.Columns["Price"].HeaderText = "Ціна (грн)";
             if (dataGridView1.Columns["ExpiryDate"] != null)
                 dataGridView1.Columns["ExpiryDate"].HeaderText = "Термін придатності";
-            dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
         private void ClearEditFields()
         {
@@ -115,7 +109,6 @@ namespace Shef_Kuhar_2.Forms
             ProductService.SaveProducts(products);
             ProductService.AddHistory($"Додано продукт: {name}, {quantity} {unit}, придатний до {expiryDate:yyyy-MM-dd}");
             LoadProducts();
-
             txtName.Clear();
             numericQuantity.Value = 1;
             comboUnit.SelectedIndex = -1;
